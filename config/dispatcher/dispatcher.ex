@@ -104,11 +104,11 @@ defmodule Dispatcher do
   match "/functionarissen/*path" do
     Proxy.forward conn, path, "http://cache/functionarissen/"
   end
+  match "/functionaris-status-codes/*path" do
+    Proxy.forward conn, path, "http://cache/functionaris-status-codes/"
+  end
   match "/contact-punten/*path" do
     Proxy.forward conn, path, "http://cache/contact-punten/"
-  end
-  match "/mandataris-status-codes/*path" do
-    Proxy.forward conn, path, "http://cache/mandataris-status-codes/"
   end
   match "/fracties/*path" do
     Proxy.forward conn, path, "http://cache/fracties/"
