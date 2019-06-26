@@ -176,6 +176,9 @@ defmodule Dispatcher do
   match "/verkiezingsresultaat-gevolg-codes/*path" do
     Proxy.forward conn, path, "http://cache/verkiezingsresultaat-gevolg-codes/"
   end
+  get "/sitemap.xml" do
+    Proxy.forward conn, [], "http://sitemap/sitemap.xml"
+  end
 
   # get "/exports/*path" do
   #   # we bypass the cache on purpose since mu-cl-caches is not the master of the exports

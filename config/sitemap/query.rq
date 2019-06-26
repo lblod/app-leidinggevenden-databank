@@ -1,0 +1,10 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX lblodlg: <http://data.lblod.info/vocabularies/leidinggevenden/>
+
+SELECT ?url
+WHERE {
+  GRAPH ?g {
+    ?func a lblodlg:Functionaris ; mu:uuid ?uuid .
+    BIND(CONCAT("https://leidinggevenden.lokaalbestuur.vlaanderen.be/", STR( ?uuid ), "/functionarissen") AS ?url ) .
+  }
+}

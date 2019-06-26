@@ -17,7 +17,6 @@ services:
   #   labels:
   #     - "logging=true"
   #   logging: *default-logging
-  # identifier:
   identifier:
     image: semtech/mu-identifier:1.6.1
     environment:
@@ -71,3 +70,9 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  sitemap:
+    image: lblod/sitemap-service
+    volumes:
+      - ./config/sitemap/:/config/
+    links:
+      - database:database
