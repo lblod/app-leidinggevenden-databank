@@ -1,0 +1,10 @@
+PREFIX mu: <http://mu.semte.ch/vocabularies/core/>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+
+SELECT ?url
+WHERE {
+  GRAPH ?g {
+    ?bestuurseenheid a besluit:Bestuurseenheid ; mu:uuid ?uuid .
+    BIND(CONCAT("https://leidinggevenden.lokaalbestuur.vlaanderen.be/", STR( ?uuid ), "/functionarissen") AS ?url ) .
+  }
+}
