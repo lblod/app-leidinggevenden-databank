@@ -17,7 +17,7 @@ services:
     restart: always
     logging: *default-logging
   identifier:
-    image: semtech/mu-identifier:1.6.1
+    image: semtech/mu-identifier:1.7.0
     environment:
       DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
     restart: always
@@ -44,7 +44,7 @@ services:
       - "logging=true"
     logging: *default-logging
   cache:
-    image: semtech/mu-cache:0.6.0
+    image: semtech/mu-cache:2.0.0
     links:
       - resource:backend
     restart: always
@@ -70,7 +70,7 @@ services:
       - "logging=true"
     logging: *default-logging
   sitemap:
-    image: lblod/sitemap-service
+    image: lblod/sitemap-service:0.1.0
     volumes:
       - ./config/sitemap/:/config/
     links:
