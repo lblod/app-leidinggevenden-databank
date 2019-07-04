@@ -70,9 +70,10 @@ services:
       - "logging=true"
     logging: *default-logging
   sitemap:
-    image: lblod/sitemap-service:0.1.0
+    image: lblod/sitemap-service:0.2.0
     volumes:
       - ./config/sitemap/:/config/
+      - ./data/sitemap:/data
     links:
       - database:database
     restart: always
