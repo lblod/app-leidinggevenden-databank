@@ -1,0 +1,93 @@
+PREFIX mandaat: <http://data.vlaanderen.be/ns/mandaat#>
+PREFIX besluit: <http://data.vlaanderen.be/ns/besluit#>
+PREFIX persoon: <http://data.vlaanderen.be/ns/persoon#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX org: <http://www.w3.org/ns/org#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ext: <http://mu.semte.ch/vocabularies/ext/>
+PREFIX regorg: <https://www.w3.org/ns/regorg#>
+PREFIX lblodlg: <http://data.lblod.info/vocabularies/leidinggevenden/>
+PREFIX schema: <http://schema.org/>
+PREFIX adres: <https://data.vlaanderen.be/ns/adres#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+
+SELECT  ?bestuurseenheidLabel ?bestuurseenheidClassificatieLabel ?bestuursfunctieLabel ?website ?telefoon ?email ?functionaris ?voornaam ?achternaam ?roepnaam ?start ?eind ?statusLabel (?cp as ?contactpoint) ?contact_gemeente ?contact_postcode ?contact_straat  ?contact_huisnummer ?contact_busnummer ?bestuursfunctie ?bestuursorgaan  ?bestuurseenheid ?contact_adressenregister
+FROM <http://mu.semte.ch/application>
+WHERE {
+  ?functionaris a lblodlg:Functionaris;
+                org:holds ?bestuursfunctie;
+                mandaat:isBestuurlijkeAliasVan ?persoon.
+
+  OPTIONAL {
+    ?functionaris mandaat:start ?start .
+  }
+
+  OPTIONAL {
+    ?functionaris mandaat:einde ?eind .
+  }
+  OPTIONAL {
+    ?functionaris mandaat:status ?functionarisStatus .
+    ?functionarisStatus skos:prefLabel ?statusLabel .
+  }
+
+  OPTIONAL {
+    ?functionaris mandaat:isBestuurlijkeAliasVan ?persoon .
+    OPTIONAL { ?persoon foaf:familyName ?achternaam . }
+    OPTIONAL { ?persoon persoon:gebruikteVoornaam ?voornaam . }
+    OPTIONAL { ?persoon foaf:name ?roepnaam . }
+  }
+
+  OPTIONAL {
+    ?bestuursfunctie skos:prefLabel ?bestuursfunctieLabel.
+  }
+  OPTIONAL {
+    ?bestuursfunctie schema:contactPoint ?cp.
+    OPTIONAL {
+      ?cp schema:telephone ?telefoon
+    }
+    OPTIONAL {
+      ?cp foaf:page ?website
+    }
+    OPTIONAL {
+      ?cp schema:email ?email
+    }
+    OPTIONAL {
+      ?cp locn:address ?address.
+      ?address adres:gemeentenaam ?contact_gemeente;
+               adres:postcode ?contact_postcode;
+               locn:thoroughfare ?contact_straat.
+      OPTIONAL {
+         ?address adres:Adresvoorstelling.huisnummer ?contact_huisnummer.
+      }
+      OPTIONAL {
+         ?address adres:Adresvoorstelling.busnummer ?contact_busnummer.
+      }
+      OPTIONAL {
+         ?address adres:verwijstNaar ?contact_adressenregister.
+      }
+    }
+  }
+  OPTIONAL {
+    ?bestuursorgaanInTijd lblodlg:heeftBestuursfunctie ?bestuursfunctie;
+                          mandaat:isTijdspecialisatieVan ?bestuursorgaan .
+    OPTIONAL {
+      ?bestuursorgaan besluit:classificatie ?bestuursorgaanClassificatie .
+      OPTIONAL { ?bestuursorgaanClassificatie skos:prefLabel ?bestuursorgaanClassificatieLabel }
+    }
+    OPTIONAL {
+      ?bestuursorgaan besluit:bestuurt ?bestuurseenheid .
+      OPTIONAL { ?bestuurseenheid skos:prefLabel ?bestuurseenheidLabel . }
+      OPTIONAL {
+        ?bestuurseenheid besluit:classificatie ?bestuurseenheidClassificatie .
+        OPTIONAL { ?bestuurseenheidClassificatie skos:prefLabel ?bestuurseenheidClassificatieLabel . }
+      }
+      OPTIONAL {
+        ?bestuurseenheid besluit:werkingsgebied ?werkingsgebied .
+        OPTIONAL { ?werkingsgebied rdfs:label ?werkingsgebiedLabel . }
+        OPTIONAL { ?werkingsgebied ext:werkingsgebiedNiveau ?werkingsgebiedNiveau . }
+      }
+    } 
+  }
+}
+ORDER BY ?bestuurseenheidLabel ?bestuurseenheidClassificatieLabel
