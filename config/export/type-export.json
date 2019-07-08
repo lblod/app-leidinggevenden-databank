@@ -94,8 +94,7 @@
     {
       "type": "locn:Address",
       "requiredProperties": [
-        "adres:gemeentenaam",
-        "adres:postcode"
+        "locn:fullAddress"
       ],
       "optionalProperties": [
         "locn:adminUnit1",
@@ -106,7 +105,8 @@
         "adres:land",
         "locn:thoroughfare",
         "adres:verwijstNaar",
-        "locn:fullAddress"
+        "adres:gemeentenaam",
+        "adres:postcode"
       ],
       "additionalFilter": "?bestuursfunctie a lblodlg:Bestuursfunctie; schema:contactPoint/locn:address ?resource"
     },
