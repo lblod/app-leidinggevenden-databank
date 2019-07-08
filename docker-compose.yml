@@ -84,6 +84,9 @@ services:
     logging: *default-logging
   export:
     image: lblod/mandaten-download-generator-service:0.3.4
+    environment:
+      EXPORT_FILE_BASE: 'leidinggevenden'
+      EXPORT_CRON_PATTERN: "0 0 6 * * *" # after import of leidinggevenden
     volumes:
       - ./data/exports:/data/exports
       - ./config/export:/config
