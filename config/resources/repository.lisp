@@ -35,3 +35,5 @@
 
 (add-prefix "email" "http://mu.semte.ch/vocabularies/ext/email/")
 (add-prefix "lblodlg" "http://data.lblod.info/vocabularies/leidinggevenden/")
+(add-prefix "locn" "http://www.w3.org/ns/locn#")
+(add-prefix "adres" "https://data.vlaanderen.be/ns/adres#")
