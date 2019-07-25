@@ -11,8 +11,8 @@
 
 (read-domain-file "slave-besluit-domain.lisp")
 (read-domain-file "slave-leidinggevenden-domain.lisp")
+(read-domain-file "slave-contact-domain.lisp")
 (read-domain-file "slave-mandaat-domain.lisp")
-(read-domain-file "slave-publicatie-gn-domain.lisp")
 
 (define-resource export ()
   :class (s-prefix "export:Export")
