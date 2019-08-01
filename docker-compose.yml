@@ -10,6 +10,8 @@ x-logging:
 services:
   leidinggevenden:
     image: lblod/frontend-leidinggevenden-databank:0.2.1
+    environment:
+      STATIC_FOLDERS_REGEX: "^/(assets/|font/|files/|sitemap.xml)"
     links:
       - identifier:backend
     labels:
