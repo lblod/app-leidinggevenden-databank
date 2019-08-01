@@ -12,7 +12,7 @@ PREFIX schema: <http://schema.org/>
 PREFIX adres: <https://data.vlaanderen.be/ns/adres#>
 PREFIX locn: <http://www.w3.org/ns/locn#>
 
-SELECT  ?bestuurseenheidLabel ?bestuurseenheidClassificatieLabel ?bestuursfunctieLabel ?website ?telefoon ?email ?functionaris ?voornaam ?achternaam ?roepnaam ?start ?eind ?statusLabel (?cp as ?contactpoint) ?contact_adres ?bestuursfunctie ?bestuursorgaan  ?bestuurseenheid ?contact_adressenregister
+SELECT  ?bestuurseenheidLabel ?bestuurseenheidClassificatieLabel ?bestuursfunctieLabel ?telefoon ?email ?functionaris ?voornaam ?achternaam ?roepnaam ?start ?eind ?statusLabel (?cp as ?contactpoint) ?contact_adres ?bestuursfunctie ?bestuursorgaan  ?bestuurseenheid ?contact_adressenregister
 FROM <http://mu.semte.ch/application>
 WHERE {
   ?functionaris a lblodlg:Functionaris;
@@ -45,9 +45,6 @@ WHERE {
     ?bestuursfunctie schema:contactPoint ?cp.
     OPTIONAL {
       ?cp schema:telephone ?telefoon
-    }
-    OPTIONAL {
-      ?cp foaf:page ?website
     }
     OPTIONAL {
       ?cp schema:email ?email
