@@ -66,17 +66,6 @@
       "additionalFilter":"?resource lblodlg:heeftBestuursfunctie ?bestuursfunctie."
     },
     {
-      "type": "ext:BestuursfunctieCode",
-      "requiredProperties": [
-        "mu:uuid"
-      ],
-      "optionalProperties": [
-        "skos:prefLabel",
-        "skos:scopeNote"
-      ],
-      "additionalFilter":"?bestuursfunctie org:role ?resource.\n  ?bestuursfunctie a lblodlg:Bestuursfunctie."
-    },
-    {
       "type": "schema:ContactPoint",
       "requiredProperties": [
         "mu:uuid"
@@ -165,30 +154,17 @@
         "mu:uuid"
       ],
       "optionalProperties": [
-        "rdfs:label",
-        "ext:werkingsgebiedNiveau"
+        "rdfs:label"
       ],
       "additionalFilter":"?resource ^ext:inProvincie ?eenheid.\n  ?eenheid ^besluit:bestuurt ?borg.\n  ?borg ^mandaat:isTijdspecialisatieVan ?bot.\n  ?bot lblodlg:heeftBestuursfunctie ?bestuursfunctie."
     },
     {
-      "type": "ext:BestuurseenheidClassificatieCode",
+      "type": "skos:Concept",
       "requiredProperties": [
         "mu:uuid"
       ],
       "optionalProperties": [
-        "skos:prefLabel",
-        "skos:scopeNote"
-      ],
-      "additionalFilter": ""
-    },
-    {
-      "type": "ext:BestuursorgaanClassificatieCode",
-      "requiredProperties": [
-        "mu:uuid"
-      ],
-      "optionalProperties": [
-        "skos:prefLabel",
-        "skos:scopeNote"
+        "skos:prefLabel"
       ],
       "additionalFilter": ""
     }
