@@ -62,16 +62,6 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
-  import:
-    image: lblod/mandaten-import-service:0.3.1
-    volumes:
-      - ./data/imports:/data/imports # map to actual directory on your system
-    environment:
-      CRON_PATTERN: "0 5 * * *"
-    restart: always
-    labels:
-      - "logging=true"
-    logging: *default-logging
   sitemap:
     image: lblod/sitemap-service:0.2.1
     volumes:
@@ -102,3 +92,9 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  leidinggevenden-consumer:
+    image: lblod/mandatendatabank-consumer:0.1.0
+    environment:
+      SYNC_BASE_URL: 'https://dev.loket.lblod.info' # replace with link to Loket API
+      SYNC_FILES_PATH: '/sync/leidinggevenden/files'
+      MU_APPLICATION_GRAPH: 'http://mu.semte.ch/application'
