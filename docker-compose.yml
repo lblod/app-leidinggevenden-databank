@@ -9,7 +9,7 @@ x-logging:
 
 services:
   leidinggevenden:
-    image: lblod/frontend-leidinggevenden-databank:0.2.1
+    image: lblod/frontend-leidinggevenden-databank:0.3.1
     environment:
       STATIC_FOLDERS_REGEX: "^/(assets/|font/|files/|sitemap.xml)"
     links:
@@ -36,18 +36,29 @@ services:
       - "logging=true"
     logging: *default-logging
   database:
+    image: semtech/mu-authorization:0.6.0-beta.4
+    environment:
+      MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql"
+      DATABASE_COMPATIBILITY: "Virtuoso"
+    volumes:
+      - ./config/authorization:/config
+    labels:
+      - "logging=true"
+    restart: always
+    logging: *default-logging
+  virtuoso:
     image: tenforce/virtuoso:1.3.2-virtuoso7.2.1
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/application"
     volumes:
       - ./data/db:/data
-    restart: always
     labels:
       - "logging=true"
+    restart: always
     logging: *default-logging
   cache:
-    image: semtech/mu-cache:2.0.0
+    image: semtech/mu-cache:2.0.1
     links:
       - resource:backend
     restart: always
@@ -55,13 +66,19 @@ services:
       - "logging=true"
     logging: *default-logging
   resource:
-    image: semtech/mu-cl-resources:1.17.1
+    image: semtech/mu-cl-resources:1.19.0
+    environment:
+      CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     volumes:
       - ./config/resources:/config
     restart: always
     labels:
       - "logging=true"
     logging: *default-logging
+  deltanotifier:
+    image: semtech/mu-delta-notifier:0.1.0
+    volumes:
+      - ./config/delta:/config
   import:
     image: lblod/mandaten-import-service:0.3.1
     volumes:
@@ -78,15 +95,13 @@ services:
       - ./config/sitemap/:/config/
       - ./data/sitemap:/data
     environment:
-      SITEMAP_MAX_AGE: 1440
-    links:
-      - database:database
+      SITEMAP_MAX_AGE: 5
     restart: always
     labels:
       - "logging=true"
     logging: *default-logging
   export:
-    image: lblod/mandaten-download-generator-service:0.3.4
+    image: lblod/mandaten-download-generator-service:0.3.5
     environment:
       EXPORT_FILE_BASE: 'leidinggevenden'
       EXPORT_CRON_PATTERN: "0 0 6 * * *" # after import of leidinggevenden
@@ -106,3 +121,9 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  leidinggevenden-consumer:
+    image: lblod/mandatendatabank-consumer:0.1.0
+    environment:
+      SYNC_BASE_URL: 'https://dev.loket.lblod.info' # replace with link to Loket API
+      SYNC_FILES_PATH: '/sync/leidinggevenden/files'
+      MU_APPLICATION_GRAPH: 'http://mu.semte.ch/application'

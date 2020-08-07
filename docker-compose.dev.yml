@@ -4,7 +4,9 @@ services:
     ports:
       - "80:80"
     restart: "no"
-  database:
+  virtuoso:
     ports:
-      - "8890:8890"
+      - "8891:8890"
+    restart: "no"
+  database:
     restart: "no"
