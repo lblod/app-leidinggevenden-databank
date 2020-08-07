@@ -118,7 +118,7 @@ services:
       - "logging=true"
     logging: *default-logging
   leidinggevenden-consumer:
-    image: lblod/mandatendatabank-consumer:0.1.0
+    image: lblod/mandatendatabank-consumer:0.1.2
     environment:
       SYNC_BASE_URL: 'https://dev.loket.lblod.info' # replace with link to Loket API
       SYNC_FILES_PATH: '/sync/leidinggevenden/files'
