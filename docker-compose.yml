@@ -79,16 +79,6 @@ services:
     image: semtech/mu-delta-notifier:0.1.0
     volumes:
       - ./config/delta:/config
-  import:
-    image: lblod/mandaten-import-service:0.3.1
-    volumes:
-      - ./data/imports:/data/imports # map to actual directory on your system
-    environment:
-      CRON_PATTERN: "0 5 * * *"
-    restart: always
-    labels:
-      - "logging=true"
-    logging: *default-logging
   sitemap:
     image: lblod/sitemap-service:0.2.1
     volumes:
