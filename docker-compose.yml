@@ -98,6 +98,8 @@ services:
     volumes:
       - ./data/exports:/data/exports
       - ./config/export:/config
+    links:
+      - virtuoso:database
     restart: always
     labels:
       - "logging=true"
