@@ -9,9 +9,7 @@ x-logging:
 
 services:
   leidinggevenden:
-    image: lblod/frontend-leidinggevenden-databank:0.3.1
-    environment:
-      STATIC_FOLDERS_REGEX: "^/(assets/|font/|files/|sitemap.xml)"
+    image: lblod/frontend-leidinggevenden-databank:0.4.1
     links:
       - identifier:backend
     labels:
@@ -19,7 +17,7 @@ services:
     restart: always
     logging: *default-logging
   identifier:
-    image: semtech/mu-identifier:1.7.0
+    image: semtech/mu-identifier:1.9.0
     environment:
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: "[{\"variables\":[],\"name\":\"public\"}]"
       DEFAULT_ACCESS_CONTROL_ALLOW_ORIGIN_HEADER: "*"
