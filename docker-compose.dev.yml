@@ -10,3 +10,5 @@ services:
     restart: "no"
   database:
     restart: "no"
+  file:
+    restart: "no"

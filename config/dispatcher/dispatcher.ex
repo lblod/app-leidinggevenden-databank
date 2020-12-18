@@ -79,6 +79,16 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://resource/exports/"
   end
 
+  ###############################################################
+  # delta-files
+  ###############################################################
+  get "/delta-files/:id/download" do
+    Proxy.forward conn, [], "http://file/files/" <> id <> "/download"
+  end
+  get "/sync/functionarissen/files/*path" do
+    Proxy.forward conn, path, "http://leidinggevenden-producer/files/"
+  end
+
   match _ do
     send_resp( conn, 404, "Route not found.  See config/dispatcher.ex" )
   end
