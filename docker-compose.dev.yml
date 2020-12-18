@@ -12,3 +12,7 @@ services:
     restart: "no"
   file:
     restart: "no"
+  leidinggevenden-consumer:
+    restart: "no"
+  leidinggevenden-producer:
+    restart: "no"
