@@ -10,3 +10,9 @@ services:
     restart: "no"
   database:
     restart: "no"
+  file:
+    restart: "no"
+  leidinggevenden-consumer:
+    restart: "no"
+  leidinggevenden-producer:
+    restart: "no"

@@ -111,12 +111,29 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
+  file:
+    image: semtech/mu-file-service:3.1.1
+    volumes:
+      - ./data/files:/share
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   leidinggevenden-consumer:
     image: lblod/mandatendatabank-consumer:0.1.4
     environment:
       SYNC_BASE_URL: 'https://loket.lblod.info' # replace with link to Loket API
       SYNC_FILES_PATH: '/sync/leidinggevenden/files'
       MU_APPLICATION_GRAPH: 'http://mu.semte.ch/application'
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
+  leidinggevenden-producer:
+    image: lblod/simple-delta-file-producer:0.0.3
+    volumes:
+      - ./data/files:/share
+      - ./config/producer/:/config/
     restart: always
     labels:
       - "logging=true"
