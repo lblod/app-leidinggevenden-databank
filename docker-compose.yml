@@ -134,3 +134,7 @@ services:
     volumes:
       - ./data/files:/share
       - ./config/producer/:/config/
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
