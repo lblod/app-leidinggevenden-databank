@@ -19,7 +19,7 @@ defmodule Acl.UserGroups.Config do
         useage: [:read],
         access: %AlwaysAccessible{},
         graphs: [ %GraphSpec{
-                    graph: "http://mu.semte.ch/application",
+                    graph: "http://mu.semte.ch/graphs/public",
                     constraint: %ResourceConstraint{
                       resource_types: [
                         "http://data.vlaanderen.be/ns/besluit#Bestuurseenheid",
@@ -34,7 +34,14 @@ defmodule Acl.UserGroups.Config do
                         "http://data.lblod.info/vocabularies/leidinggevenden/FunctionarisStatusCode",
                         "http://www.w3.org/ns/person#Person",
                         "http://www.w3.org/ns/prov#Location"
-                    ] } } ] }
+                    ] } } ] },
+      # // CLEANUP
+      #
+      %GraphCleanup{
+        originating_graph: "http://mu.semte.ch/application",
+        useage: [:write],
+        name: "clean"
+      }
     ]
   end
 end
