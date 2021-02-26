@@ -55,6 +55,18 @@ services:
       - "logging=true"
     restart: always
     logging: *default-logging
+  migrations:
+    image: semtech/mu-migrations-service:0.6.0
+    environment:
+      MU_SPARQL_TIMEOUT: '300'
+    links:
+      - virtuoso:database
+    volumes:
+      - ./config/migrations:/data/migrations
+    restart: always
+    labels:
+      - "logging=true"
+    logging: *default-logging
   cache:
     image: semtech/mu-cache:2.0.1
     links:
