@@ -1,14 +1,32 @@
 version: '3.4'
 services:
+  leidinggevenden:
+    restart: "no"
   identifier:
     ports:
       - "80:80"
+    restart: "no"
+  dispatcher:
+    restart: "no"
+  database:
     restart: "no"
   virtuoso:
     ports:
       - "8891:8890"
     restart: "no"
-  database:
+  migrations:
+    restart: "no"
+  cache:
+    restart: "no"
+  resource:
+    restart: "no"
+  deltanotifier:
+    restart: "no"
+  sitemap:
+    restart: "no"
+  export:
+    restart: "no"
+  filehost:
     restart: "no"
   file:
     restart: "no"
