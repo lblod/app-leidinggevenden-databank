@@ -1,3 +1,13 @@
+#####################
+# Avoid sprintf error
+INSERT DATA {
+  GRAPH <http://mu.semte.ch/application> {
+     <http://dummy/data/subject> a <http://www.w3.org/ns/prov#Location> .
+  }
+}
+
+;
+
 DELETE {
   GRAPH  <http://mu.semte.ch/application> {
     ?s ?p ?o .
@@ -8,6 +18,30 @@ DELETE {
   }
 } WHERE {
   GRAPH  <http://mu.semte.ch/application> {
-    ?s ?p ?o .
+    ?s a ?type ; ?p ?o .
+    VALUES ?type {
+     <http://data.vlaanderen.be/ns/besluit#Bestuurseenheid>
+     <http://mu.semte.ch/vocabularies/ext/BestuurseenheidClassificatieCode>
+     <http://data.vlaanderen.be/ns/besluit#Bestuursorgaan>
+     <http://mu.semte.ch/vocabularies/ext/BestuursorgaanClassificatieCode>
+     <http://schema.org/ContactPoint>
+     <http://www.w3.org/ns/locn#Address>
+     <http://data.lblod.info/vocabularies/leidinggevenden/Bestuursfunctie>
+     <http://mu.semte.ch/vocabularies/ext/BestuursfunctieCode>
+     <http://data.lblod.info/vocabularies/leidinggevenden/Functionaris>
+     <http://data.lblod.info/vocabularies/leidinggevenden/FunctionarisStatusCode>
+     <http://www.w3.org/ns/person#Person>
+     <http://www.w3.org/ns/prov#Location>
+    }
+  }
+}
+
+;
+
+#####################
+# Avoid sprintf error
+DELETE DATA {
+  GRAPH <http://mu.semte.ch/graphs/public> {
+     <http://dummy/data/subject> a <http://www.w3.org/ns/prov#Location> .
   }
 }
