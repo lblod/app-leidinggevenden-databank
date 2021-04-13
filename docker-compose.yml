@@ -107,6 +107,7 @@ services:
   export:
     image: lblod/mandaten-download-generator-service:0.3.6
     environment:
+      MU_APPLICATION_GRAPH: "http://mu.semte.ch/graphs/public"
       EXPORT_FILE_BASE: 'leidinggevenden'
       EXPORT_CRON_PATTERN: "0 0 6 * * *" # after import of leidinggevenden
     volumes:

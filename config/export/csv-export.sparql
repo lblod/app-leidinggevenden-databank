@@ -13,7 +13,7 @@ PREFIX adres: <https://data.vlaanderen.be/ns/adres#>
 PREFIX locn: <http://www.w3.org/ns/locn#>
 
 SELECT  ?bestuurseenheidLabel ?bestuurseenheidClassificatieLabel ?bestuursfunctieLabel ?telefoon ?email ?functionaris ?voornaam ?achternaam ?roepnaam ?start ?eind ?statusLabel (?cp as ?contactpoint) ?contact_adres ?bestuursfunctie ?bestuursorgaan  ?bestuurseenheid ?contact_adressenregister
-FROM <http://mu.semte.ch/application>
+FROM <http://mu.semte.ch/graphs/public>
 WHERE {
   ?functionaris a lblodlg:Functionaris;
                 org:holds ?bestuursfunctie;
