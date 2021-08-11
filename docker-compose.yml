@@ -34,7 +34,7 @@ services:
       - "logging=true"
     logging: *default-logging
   database:
-    image: semtech/mu-authorization:0.6.0-beta.4
+    image: cecemel/mu-authorization:0.6.0-beta.8
     environment:
       MU_SPARQL_ENDPOINT: "http://virtuoso:8890/sparql"
       DATABASE_COMPATIBILITY: "Virtuoso"
@@ -51,6 +51,8 @@ services:
       DEFAULT_GRAPH: "http://mu.semte.ch/application"
     volumes:
       - ./data/db:/data
+      - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini # Note: on production override this setting
+      - ./config/virtuoso/:/opt/virtuoso-scripts
     labels:
       - "logging=true"
     restart: always
@@ -86,7 +88,7 @@ services:
       - "logging=true"
     logging: *default-logging
   deltanotifier:
-    image: semtech/mu-delta-notifier:0.1.0
+    image: cecemel/delta-notifier:0.2.0-beta.2
     volumes:
       - ./config/delta:/config
     restart: always
@@ -136,11 +138,18 @@ services:
     labels:
       - "logging=true"
     logging: *default-logging
-
 ################################################################################
 # DELTAS
 ################################################################################
-  delta-producer-report-generator:
+  deliver-email-service:
+    image: redpencil/deliver-email-service:0.2.0
+    environment:
+      MAILBOX_URI: 'http://data.lblod.info/id/mailboxes/1'
+    labels:
+      - "logging=true"
+    logging: *default-logging
+    restart: always
+  delta-report-generator:
     image: lblod/delta-producer-report-generator:0.3.0
     environment:
       OUTBOX: "http://data.lblod.info/id/mail-folders/2"
@@ -155,10 +164,12 @@ services:
       SYNC_DATASET_SUBJECT: "http://data.lblod.info/datasets/delta-producer/dumps/LeidinggevendenCacheGraphDump"
       INITIAL_SYNC_JOB_OPERATION: "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/leidinggevenden"
       JOB_CREATOR_URI: "http://data.lblod.info/services/id/leidinggevenden-consumer"
-      #DISABLE_INITIAL_SYNC: 'true'
-      #WAIT_FOR_INITIAL_SYNC: 'false'
+      DISABLE_INITIAL_SYNC: 'true'
       BYPASS_MU_AUTH_FOR_EXPENSIVE_QUERIES: 'true'
       KEEP_DELTA_FILES: 'true'
+      DELTA_FILE_FOLDER: '/consumer-files'
+    volumes:
+      - ./data/files/consumer-files/mandatarissen:/consumer-files/
     restart: always
     labels:
       - "logging=true"
