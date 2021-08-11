@@ -169,7 +169,7 @@ services:
       KEEP_DELTA_FILES: 'true'
       DELTA_FILE_FOLDER: '/consumer-files'
     volumes:
-      - ./data/files/consumer-files/mandatarissen:/consumer-files/
+      - ./data/files/consumer-files/leidinggevenden:/consumer-files/
     restart: always
     labels:
       - "logging=true"
