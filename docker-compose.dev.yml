@@ -30,6 +30,10 @@ services:
     restart: "no"
   file:
     restart: "no"
+  deliver-email-service:
+    restart: "no"
+  delta-report-generator:
+    restart: "no"
   leidinggevenden-consumer:
     restart: "no"
   leidinggevenden-producer:
