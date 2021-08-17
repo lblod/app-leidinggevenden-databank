@@ -52,19 +52,5 @@ export default [
       ignoreFromSelf: true,
       optOutMuScopeIds: [ "http://redpencil.data.gift/id/jobs/concept/JobOperation/deltas/consumer/initialSync/leidinggevenden" ]
     }
-  },
-  {
-    match: {
-      // anything
-    },
-    callback: {
-      url: 'http://leidinggevenden-producer/delta',
-      method: 'POST'
-    },
-    options: {
-      resourceFormat: 'v0.0.1',
-      gracePeriod: 1000,
-      ignoreFromSelf: true
-    }
   }
 ];
