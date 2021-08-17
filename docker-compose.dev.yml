@@ -36,5 +36,3 @@ services:
     restart: "no"
   leidinggevenden-consumer:
     restart: "no"
-  leidinggevenden-producer:
-    restart: "no"
