@@ -9,7 +9,7 @@ x-logging:
 
 services:
   leidinggevenden:
-    image: lblod/frontend-leidinggevenden-databank:0.4.5
+    image: lblod/frontend-leidinggevenden-databank:0.4.6
     links:
       - identifier:backend
     labels:
