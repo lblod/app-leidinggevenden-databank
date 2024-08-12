@@ -155,6 +155,10 @@ services:
       OUTBOX: "http://data.lblod.info/id/mail-folders/2"
     volumes:
       - ./config/delta-producer-consumer/report-generator:/config
+    labels:
+      - "logging=true"
+    logging: *default-logging
+    restart: always
   leidinggevenden-consumer:
     image: lblod/delta-consumer-single-graph-maintainer:0.3.4
     environment:
