@@ -1,0 +1,10 @@
+CONSTRUCT {
+  ?s
+    a <http://mu.semte.ch/vocabularies/ext/BestuursorgaanClassificatieCode> ;
+    ?p ?o .
+}
+WHERE {
+  ?s
+    a <http://lblod.data.gift/vocabularies/organisatie/BestuursorgaanClassificatieCode> ;
+    ?p ?o .
+}

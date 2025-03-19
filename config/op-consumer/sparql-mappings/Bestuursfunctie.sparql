@@ -1,0 +1,10 @@
+CONSTRUCT {
+  ?s
+    a <http://data.lblod.info/vocabularies/leidinggevenden/Bestuursfunctie> ;
+    ?p ?o .
+}
+WHERE {
+  ?s
+    a <http://data.lblod.info/vocabularies/leidinggevenden/Bestuursfunctie> ;
+    ?p ?o .
+}

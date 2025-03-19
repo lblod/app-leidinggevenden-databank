@@ -1,0 +1,8 @@
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s
+    a <http://data.lblod.info/vocabularies/leidinggevenden/FunctionarisStatusCode> ;
+    ?p ?o .
+}
