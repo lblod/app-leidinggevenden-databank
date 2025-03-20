@@ -1,0 +1,14 @@
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s
+    a <http://www.w3.org/ns/prov#Location> ;
+    ?p ?o .
+
+  FILTER (?p in (
+    <http://mu.semte.ch/vocabularies/core/uuid>,
+    <http://www.w3.org/2000/01/rdf-schema#label>,
+    <http://mu.semte.ch/vocabularies/ext/werkingsgebiedNiveau>
+  ))
+}
