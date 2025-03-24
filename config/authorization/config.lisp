@@ -2,14 +2,16 @@
 ;;; delta messenger
 (in-package :delta-messenger)
 
-(add-delta-logger)
+;(add-delta-logger)
 (add-delta-messenger "http://deltanotifier/")
 
 ;;;;;;;;;;;;;;;;;
 ;;; configuration
 (in-package :client)
-(setf *log-sparql-query-roundtrip* t)
+;(setf *log-sparql-query-roundtrip* t)
 (setf *backend* "http://virtuoso:8890/sparql")
+(setf dexador.util:*default-connect-timeout* 60)
+(setf dexador.util:*default-read-timeout* 60)
 
 (in-package :server)
 (setf *log-incoming-requests-p* nil)
@@ -26,17 +28,6 @@
   :locn "http://www.w3.org/ns/locn#"
   :person "http://www.w3.org/ns/person#"
   :prov "http://www.w3.org/ns/prov#")
-
-(defparameter *access-specifications* nil
-  "All known ACCESS specifications.")
-
-(defparameter *graphs* nil
-  "All known GRAPH-SPECIFICATION instances.")
-
-(defparameter *rights* nil
-  "All known GRANT instances connecting ACCESS-SPECIFICATION to GRAPH.")
-
-(type-cache::add-type-for-prefix "http://mu.semte.ch/sessions/" "http://mu.semte.ch/vocabularies/session/Session")
 
 (define-graph public ("http://mu.semte.ch/graphs/public")
   ("leidinggevenden:Bestuursfunctie" -> _)
