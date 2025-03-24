@@ -1,0 +1,8 @@
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s
+    a <http://lblod.data.gift/vocabularies/organisatie/BestuursfunctieCode> ;
+    ?p ?o .
+}
