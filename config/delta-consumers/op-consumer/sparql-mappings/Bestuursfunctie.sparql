@@ -1,7 +1,5 @@
 CONSTRUCT {
-  ?s
-    a <http://data.lblod.info/vocabularies/leidinggevenden/Bestuursfunctie> ;
-    ?p ?o .
+  ?s ?p ?o .
 }
 WHERE {
   ?s

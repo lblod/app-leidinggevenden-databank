@@ -1,7 +1,5 @@
 CONSTRUCT {
-  ?s
-    a <http://mu.semte.ch/vocabularies/ext/MandatarisStatusCode> ;
-    ?p ?o .
+  ?s ?p ?o .
 }
 WHERE {
   ?s
