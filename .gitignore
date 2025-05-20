@@ -10,6 +10,7 @@
 /data/db/virtuoso.trx
 /data/exports/*
 /data/sitemap/*
+/data/files
 !/data/db/virtuoso.ini
 !/data/db/toLoad
 !/data/db/toLoad/*
