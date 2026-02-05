@@ -3,8 +3,11 @@
 - Modernize frontend
 - Modernize dispatcher
 ### Deploy notes
+
+Move the `VIRTUAL_HOST` and `LETSENCRYPT` environment variables from the `leidinggevenden` to the `identifier` service. Also make sure the `networks` config is moved.
+
 ```
-drc up -d dispatcher leidinggevenden
+drc up -d identifier dispatcher leidinggevenden
 ```
 
 ## v1.9.0
